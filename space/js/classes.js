@@ -253,7 +253,7 @@ class DustParticle {
 
     /// Shining effect    
     this.shine_radius = (this.radius||1)*20;
-    this.reduction_intercal = setInterval(() => {
+    this.reduction_interval = setInterval(() => {
       const date_now = new Date();
       const age_ms = date_now - this.created_at;
       let lifetime_left_ms = this.lifespan_ms-age_ms;
@@ -292,8 +292,11 @@ class DustParticle {
     if(other_body.type == "star") this.color = other_body.color;    
   }
   destroy() {
-    clearInterval(this.reduction_intercal);
+    clearInterval(this.reduction_interval);
     clearTimeout(this.destroy_timeout);
+    space.bodies.splice(space.bodies.indexOf(this), 1);
+
+    /// This causes weird bugs
     if(space.bodies.indexOf(this) != -1)
       space.bodies.splice(space.bodies.indexOf(this), 1);
     if(space.bodies_noninteractive.indexOf(this) != -1)

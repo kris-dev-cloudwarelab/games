@@ -7,7 +7,7 @@ function startGame(){
 
     ship.current_order = getOrderIndexByTag(presets.first_order_tag);
     
-    generateGalaxy({announcement: false});
+    generateGalaxy();
     loop(performance.now());
     setInterval(slowLoop, 500);
 }
@@ -27,7 +27,7 @@ function restartGame(){
     
     space.galaxy.x = 0;
     space.galaxy.y = 0;
-    generateGalaxy({announcement: false});
+    generateGalaxy();
     welcomeMessage();
 
     setTimeout(() => {

@@ -21,13 +21,13 @@ function drawConsoles(){
         <b>UPGRADES</b>
 
         <div class="console_row">
-            <div class="small_button" onclick="upgrade('ship_speed')">✚</div>
+            <div class="button small" onclick="upgrade('ship_speed')">✚</div>
             Ship speed: ${Math.round(ship.thrust*100)} 
         </div>
         <span class="note">${resToUpgrade("ship_speed")} energy required</span>
 
         <div class="console_row">
-            <div class="small_button" onclick="upgrade('projectile_damage')">✚</div>
+            <div class="button small" onclick="upgrade('projectile_damage')">✚</div>
             Laser damage: ${Math.round(ship.weapon.projectile_damage)} 
         </div> 
         <span class="note">${resToUpgrade("projectile_damage")} energy required</span>
@@ -39,6 +39,12 @@ function drawConsoles(){
     ship_console.innerHTML = `
         
         ${upgrade_menu}
+
+        <b>DEVELOPMENT OPTIONS</b>
+        <br/><div onclick="ship.cargo.resources += 1000" class="button">+1000 energy</div>
+        <br/><div onclick="ship.console.upgrade_menu_available = !ship.console.upgrade_menu_available" class="button">Toggle upgrade menu</div>    
+        <br/><div onclick="maxShipUpgrades()" class="button">Max upgrades</div>        
+        <br/>
 
         <b>CARGO</b>
         <br/>Energy: ${ship.cargo.resources}             
@@ -52,6 +58,16 @@ function drawConsoles(){
 
 }
 
+function maxShipUpgrades(){
+
+    ship.cargo.resources = 20*1000
+    while(getUpgradeLevel("ship_speed") < 10 && ship.cargo.resources > resToUpgrade("ship_speed")){
+        upgrade("ship_speed")
+    }
+    while(getUpgradeLevel("projectile_damage") < 10 && ship.cargo.resources > resToUpgrade("projectile_damage")){
+        upgrade("projectile_damage")
+    }
+}
 function upgrade(upgrade_type){
 
     console.log("Upgrading " + upgrade_type)

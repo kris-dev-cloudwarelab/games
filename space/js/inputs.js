@@ -1,39 +1,82 @@
 
-// ---------- INPUT ----------
+// // ---------- INPUT ----------
 
-canvas.addEventListener("mousedown", () => {
+// canvas.addEventListener("mousedown", () => {
 
-    // console.log("mousedown event", event.button)
-    event.preventDefault()
-    if(!ship.alive || ship.inputs_disabled) return
-    /// LMB for engines
-    if(event.button == 0) toggleShipEngines(true)
+//     // console.log("mousedown event", event.button)
+//     event.preventDefault()
+//     if(!ship.alive || ship.inputs_disabled) return
+//     /// LMB for engines
+//     if(event.button == 0) toggleShipEngines(true)
+// });
+// canvas.addEventListener("mouseup", () => {
+//     if(!ship.alive || ship.inputs_disabled) return
+//     toggleShipEngines(false)
+// });
+// // Optional: stop thrust if mouse leaves window
+// canvas.addEventListener("mouseleave", () => {
+//     if(!ship.alive || ship.inputs_disabled) return
+//     toggleShipEngines(false)
+// });
+
+// canvas.addEventListener("mousemove", (e) => {
+
+//     if(!ship.alive || ship.inputs_disabled) return
+//     const rect = canvas.getBoundingClientRect();
+//     const screenX = e.clientX - rect.left;
+//     const screenY = e.clientY - rect.top;
+
+//     const { x, y } = screenToWorld(screenX, screenY);
+
+//     ship.turnToCoordinates(x, y);
+// });
+// ---------- INPUT (Mouse + Touch unified) ----------
+
+canvas.addEventListener("pointerdown", (event) => {
+    event.preventDefault();
+
+    if (!ship.alive || ship.inputs_disabled) return;
+
+    // Left click OR touch
+    if (event.button === 0 || event.pointerType === "touch") {
+        toggleShipEngines(true);
+    }
+
+    // Capture pointer so we still receive events if finger moves off canvas
+    canvas.setPointerCapture(event.pointerId);
 });
-addEventListener("wheel", (event) => { 
-    if(!ship.alive || ship.inputs_disabled) return
-    shootProjectile()
-})
-canvas.addEventListener("mouseup", () => {
-    if(!ship.alive || ship.inputs_disabled) return
-    toggleShipEngines(false)
-});
-// Optional: stop thrust if mouse leaves window
-canvas.addEventListener("mouseleave", () => {
-    if(!ship.alive || ship.inputs_disabled) return
-    toggleShipEngines(false)
+
+canvas.addEventListener("pointerup", (event) => {
+    if (!ship.alive || ship.inputs_disabled) return;
+    toggleShipEngines(false);
 });
 
-canvas.addEventListener("mousemove", (e) => {
+canvas.addEventListener("pointercancel", () => {
+    if (!ship.alive || ship.inputs_disabled) return;
+    toggleShipEngines(false);
+});
 
-    if(!ship.alive || ship.inputs_disabled) return
+canvas.addEventListener("pointermove", (e) => {
+    if (!ship.alive || ship.inputs_disabled) return;
+
     const rect = canvas.getBoundingClientRect();
     const screenX = e.clientX - rect.left;
     const screenY = e.clientY - rect.top;
 
     const { x, y } = screenToWorld(screenX, screenY);
-
     ship.turnToCoordinates(x, y);
 });
+
+// SHOOTING
+const fireBtn = document.getElementById("fireButton");
+addEventListener("wheel", (event) => { 
+    fireBtn.dispatchEvent(new PointerEvent("pointerdown"));
+})
+fireBtn.addEventListener("pointerdown", () => {
+    if (!ship.alive || ship.inputs_disabled) return;
+    shootProjectile();
+});
+
 
 // ---------- RESET ----------
 window.addEventListener("keydown", e => {

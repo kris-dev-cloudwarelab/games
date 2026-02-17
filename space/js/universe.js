@@ -81,10 +81,50 @@ function checkCollisionsForBodies(b, b2) {
 }
 
 
-function generateGalaxy(options = { announcement: true }){
+
+function redrawBodies(x_change, y_change){
+    
+    const bodies_noninteractive = space.bodies_noninteractive.filter(b => mustRespawnInNextGalaxy(b));
+    // console.log(`redrawBodies() bodies_noninteractive`, bodies_noninteractive);
+    redrawBodiesExec(x_change, y_change, bodies_noninteractive);
+
+    const bodies_to_redraw = space.bodies.filter(b => mustRespawnInNextGalaxy(b));
+    // console.log(`redrawBodies() bodies_to_redraw`, bodies_to_redraw);
+    redrawBodiesExec(x_change, y_change, bodies_to_redraw);
+}
+
+function redrawBodiesExec(x_change, y_change, bodies_to_redraw){
+
+    bodies_to_redraw = [...bodies_to_redraw]
+    for(let i=0; i<bodies_to_redraw.length; i++){
+        /// Remap coordinates to the new segment
+        if(x_change === 1){
+            /// Means we went to the right and dust must respawn to the left
+            bodies_to_redraw[i].x = bodies_to_redraw[i].x - space.x - space.wrap_segment.x*2;
+        }else if(x_change === -1){
+            bodies_to_redraw[i].x = bodies_to_redraw[i].x + space.x + space.wrap_segment.x*2;
+        }else if(y_change === 1){
+            /// Means we went down and dust must respawn to the top
+            bodies_to_redraw[i].y = bodies_to_redraw[i].y - space.y - space.wrap_segment.y*2;
+        }else if(y_change === -1){
+            bodies_to_redraw[i].y = bodies_to_redraw[i].y + space.y + space.wrap_segment.y*2;
+        }
+    }
+}
+
+function mustRespawnInNextGalaxy(b){
+    const x_distance = Math.abs(b.x - ship.x);
+    const y_distance = Math.abs(b.y - ship.y);
+    if(x_distance < canvas.width/2 && y_distance < canvas.height/2) return true
+    return false
+}
+
+
+
+function generateGalaxy(announcement = false, x_increase = 0, y_increase = 0){
     
     // console.log(`generateGalaxy() space.galaxy`, space.galaxy);   
-    if(options.announcement){
+    if(announcement){
         let message = `Entering galaxy ${getGalaxyName(space.galaxy.x, space.galaxy.y)}.`
         message = message.replace("-", "-minus")
         shipSpeak(message, false, true);
@@ -93,10 +133,19 @@ function generateGalaxy(options = { announcement: true }){
     /// Keep a non-destruction radius to keep consistency
     space.bodies = space.bodies.filter(b => mustRespawnInNextGalaxy(b)); /// Untouchables
     space.bodies_noninteractive = space.bodies_noninteractive.filter(b => mustRespawnInNextGalaxy(b));
+
     // console.log("generateGalaxy() space.bodies_noninteractive", space.bodies_noninteractive);
     const background_star_count = space.bodies_noninteractive.filter(b => b.type === "background_star").length;
     const background_stars_needed = presets.space.background_stars - background_star_count;
     // console.log("generateGalaxy() background_stars_needed", background_stars_needed);
+    
+    /// Register segment change and redraw if needed
+    if(x_increase !== 0 || y_increase !== 0){
+        space.galaxy.x += x_increase;
+        space.galaxy.y += y_increase;
+        redrawBodies(x_increase, y_increase);
+    }
+
 
     /// Add background stars
     for(let i=0; i<background_stars_needed; i++) {
@@ -120,8 +169,11 @@ function generateGalaxy(options = { announcement: true }){
         // space.bodies.push(...spawnSolarSystem(getRandomNumberOfPlanets(), 500+space.y/2, 500+space.x/2));
 
         /// Add Mothership
-        mothership = new Mothership(space.x/2, space.y/2)
-        space.bodies.push(mothership);
+        /// Respawn if doesnt exist
+        if(!space.bodies.find(b => b.type === "mothership")){
+            mothership = new Mothership(space.x/2, space.y/2)
+            space.bodies.push(mothership);
+        }
 
         /// 4 solar systems in the starting galaxy, so one every direction
         const spread_distance = 3000;

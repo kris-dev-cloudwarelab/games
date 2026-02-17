@@ -10,10 +10,6 @@ function randomColor(body_type) {
 
 
 
-
-
-
-
 function spawnDust(body, fps_check=true){
     
     /// Check if framerate is above 50
@@ -38,53 +34,15 @@ function spawnDust(body, fps_check=true){
     }
 
     /// Spawn dustc
-    // space.bodies.push(new DustParticle(dust_x, dust_y, color, lifespan_ms, gravity_applies, radius, collides));
-    if(gravity_applies){
-        space.bodies.push(new DustParticle(dust_x, dust_y, color, lifespan_ms, gravity_applies, radius, collides));
-    }else{
-        space.bodies_noninteractive.push(new DustParticle(dust_x, dust_y, color, lifespan_ms, gravity_applies, radius, collides));
-    }
+    space.bodies.push(new DustParticle(dust_x, dust_y, color, lifespan_ms, gravity_applies, radius, collides));
+
+    /// This causes weird bugs
+    // if(gravity_applies){
+    //     space.bodies.push(new DustParticle(dust_x, dust_y, color, lifespan_ms, gravity_applies, radius, collides));
+    // }else{
+    //     space.bodies_noninteractive.push(new DustParticle(dust_x, dust_y, color, lifespan_ms, gravity_applies, radius, collides));
+    // }
 }
-
-function redrawBodies(x_change, y_change){
-    
-    const bodies_noninteractive = space.bodies_noninteractive.filter(b => mustRespawnInNextGalaxy(b));
-    // console.log(`redrawBodies() bodies_noninteractive`, bodies_noninteractive);
-    redrawBodiesExec(x_change, y_change, bodies_noninteractive);
-
-    const bodies_to_redraw = space.bodies.filter(b => mustRespawnInNextGalaxy(b));
-    // console.log(`redrawBodies() bodies_to_redraw`, bodies_to_redraw);
-    redrawBodiesExec(x_change, y_change, bodies_to_redraw);
-}
-
-function redrawBodiesExec(x_change, y_change, bodies_to_redraw){
-
-    bodies_to_redraw = [...bodies_to_redraw]
-    for(let i=0; i<bodies_to_redraw.length; i++){
-        /// Remap coordinates to the new segment
-        if(x_change === 1){
-            /// Means we went to the right and dust must respawn to the left
-            bodies_to_redraw[i].x = bodies_to_redraw[i].x - space.x - space.wrap_segment.x*2;
-        }else if(x_change === -1){
-            bodies_to_redraw[i].x = bodies_to_redraw[i].x + space.x + space.wrap_segment.x*2;
-        }else if(y_change === 1){
-            /// Means we went down and dust must respawn to the top
-            bodies_to_redraw[i].y = bodies_to_redraw[i].y - space.y - space.wrap_segment.y*2;
-        }else if(y_change === -1){
-            bodies_to_redraw[i].y = bodies_to_redraw[i].y + space.y + space.wrap_segment.y*2;
-        }
-    }
-
-}
-
-function mustRespawnInNextGalaxy(b){
-    const x_distance = Math.abs(b.x - ship.x);
-    const y_distance = Math.abs(b.y - ship.y);
-    if(x_distance < canvas.width/2 && y_distance < canvas.height/2) return true
-
-    return false
-}
-
 function wrapBody(body) {
 
     let wrapped = false;
@@ -92,17 +50,13 @@ function wrapBody(body) {
     let x_max = space.x + space.wrap_segment.x;
     if (body.x < x_min){
         if(body.type === "ship"){
-            space.galaxy.x--;
-            generateGalaxy();
-            redrawBodies(-1, 0);
+            generateGalaxy(true, -1, 0);
         }
         body.x = x_max; 
         wrapped = true;
     } else if (body.x > x_max){
         if(body.type === "ship"){
-            space.galaxy.x++;
-            generateGalaxy();
-            redrawBodies(1, 0);
+            generateGalaxy(true, 1, 0);
         }
         body.x = x_min;
         wrapped = true;
@@ -111,18 +65,14 @@ function wrapBody(body) {
     let y_min = 0 - space.wrap_segment.y;
     let y_max = space.y + space.wrap_segment.y;
     if (body.y < y_min){
-        if(body.type === "ship")
-            space.galaxy.y--;{
-            generateGalaxy();
-            redrawBodies(0, -1);
+        if(body.type === "ship"){
+            generateGalaxy(true, 0, -1);
         }
         body.y = y_max;
         wrapped = true;
     } else if (body.y > y_max){
         if(body.type === "ship"){
-            space.galaxy.y++;
-            generateGalaxy();
-            redrawBodies(0, 1);
+            generateGalaxy(true, 0, 1);
         }
         body.y = y_min;
         wrapped = true;

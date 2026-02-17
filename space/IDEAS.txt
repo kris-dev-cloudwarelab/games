@@ -28,6 +28,7 @@ JP feedback
 
 IDEAS
 Its like space is ultimate freedom, but you are a slave
+- Add rogue asteroids/commets that give extra points
 - Add ability to harvest planets (not destroy)
 - Add roaming pirates/aliens/dangerous NPCs
 - Add different resource types based on body color (brown = iron, green = zync etc.)
