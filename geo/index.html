@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="app.css" >
+<link rel="stylesheet" href="app_animations.css">
+
+</head>
+<body>
+
+<center>
+	<div id="end_screen"></div>
+	<div id="balloons" class="balloons_container">
+		<img src="balloons.png" />
+		<img src="balloons.png" />
+	</div>
+	<div id="balloons2" class="balloons_container">
+		<img src="balloons2.png" />
+	</div>
+	<div id="game_avatar" class="bobUpAndDown">
+		<div id="big_emoji"></div>
+		<h2 id="game_question">
+			Loading...
+		</h2>
+	</div>
+	<div id="map" class="coinToss">
+		<object id="map_svg_object" type="image/svg+xml"></object>
+	</div>
+	
+	<ul id="navbar">
+	<li><a class="active" href="#">Novadu Spēle</a></li>
+	<li>
+		<a href="#" onclick="loadLevel(0)">Latvijas rajoni 1949. gads</a>
+	</li>
+	<li>
+		<a href="#" onclick="loadLevel(1)">Latvijas rajoni 2021. gads</a>
+	</li>
+	<li style="float:right"><a href="#score">Atminēti: <span id="guessed"></span> | Kļūdas: <span id="mistakes"></span> | Laiks: <span id="timer"></span></a></li>
+	</ul>
+</center>
+
+
+</body>
+
+<script src="levels.js"></script>
+<script src="app.js"></script>
+
+
+</html>

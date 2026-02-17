@@ -1,0 +1,36 @@
+
+.coinToss{
+    animation: coinToss 30s infinite linear;
+}
+@keyframes coinToss {
+    0% {
+        transform: rotateX(325deg) rotateY(0deg);
+    }
+    25% {
+        transform: rotateX(330deg) rotateY(5deg);
+    }
+    50% {
+        transform: rotateX(325deg) rotateY(0deg);
+    }
+    75% {
+        transform: rotateX(330deg) rotateY(-5deg);
+    }
+    100% {
+        transform: rotateX(325deg) rotateY(0deg);
+    }
+}
+
+.bobUpAndDown{
+    animation: bobUpAndDown 6s infinite linear;
+}
+@keyframes bobUpAndDown {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}

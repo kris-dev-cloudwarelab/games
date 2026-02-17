@@ -3,6 +3,29 @@
 MUST DO FIXES
 - Figure out why some dust particles or asteroids get left behind with zero speed just sitting there (noncollidable too)
 Most likely to do with the generateGalaxy/
+- stop draw for objects outside canvas
+
+JP feedback
+- More attacks in boss fight
+- More missions
+- Flying and shooting should be easier
+- More boss fights/sequences
+- Add sounds to orbs
+- Add overheat countdown when near a sun
+- Add indication that the mothership will start shooting homing missiles
+- Add a better collection sound
+- Vary energy/health ratio of planets so scanning has a purpose
+- Add mini-boss planets
+- Add space stations (similar to planets) that have a force field and drop energy
+- Give weapon later, start with passive harvesting
+- Add stage 2 ballistics missiles
+- Mothership shield with a gap?
+- Other NPC harvesters that run away
+- Nanobot NPC /other types
+- Draw new ship
+- Take planets from real NASA images
+
+
 IDEAS
 Its like space is ultimate freedom, but you are a slave
 - Add ability to harvest planets (not destroy)

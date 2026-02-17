@@ -1,0 +1,5 @@
+
+Add difficulty levels
+Easy - half is already guessed?
+Moderate - default
+Hard - Ask about monuments/things inside the regions, which are obscure
