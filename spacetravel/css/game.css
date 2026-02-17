@@ -1,0 +1,85 @@
+
+
+*{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
+  -webkit-user-select: none; /* Safari */
+  user-select: none; /* Non-prefixed version, 
+                        currently supported by all other modern browsers */
+}
+:root{
+    --accent-red: #f60100;
+    --accent-red2: #ff0000;
+    --accent-green: #01f700;
+    --accent-green2: #00cc00;
+    --accent-blue: #64e9e5;
+
+    
+    --main-accent: var(--accent-blue)
+}
+
+body { 
+    margin: 0; 
+    background: black; 
+    overflow: hidden; 
+}
+canvas { 
+    display: block; 
+}
+
+.console{
+    position: fixed;
+    background-color: black;
+    border: 2px solid var(--main-accent);
+    border-radius: 10px;
+    padding: 10px;
+    opacity: 0.8;
+    color: white;
+    z-index: 3;
+    font-size: 20px;
+}
+.note{
+    font-size: 12px;
+    color: var(--main-accent);
+}
+#mothership_console{
+    pointer-events: none;
+    top: 10%;
+    left: 50%;
+    max-width: 90vw;
+    text-align: center;
+    transform: translate(-50%, -50%);
+}
+#ship_console{  
+    bottom: 20px;
+    right: 20px;
+}
+.console_row{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 5px;
+}
+.small_button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 12px;
+    color: black;
+    background-color: var(--main-accent);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+}
+#mothership_explosion_gif{
+    display: none;
+    position: fixed;    
+    transform: translate(-50%, -50%);
+    transition: width 5s linear, blur 5s linear;
+    width: 100px;
+}
+#scan_results{
+    /* Dont interact with mouse */
+    pointer-events: none;
+}

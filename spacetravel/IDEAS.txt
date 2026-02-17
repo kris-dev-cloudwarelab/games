@@ -1,0 +1,43 @@
+
+
+MUST DO FIXES
+- Figure out why some dust particles or asteroids get left behind with zero speed just sitting there (noncollidable too)
+Most likely to do with the generateGalaxy/
+IDEAS
+Its like space is ultimate freedom, but you are a slave
+- Add ability to harvest planets (not destroy)
+- Add roaming pirates/aliens/dangerous NPCs
+- Add different resource types based on body color (brown = iron, green = zync etc.)
+- Add trading hubs?
+- Add progression of what you can destroy and collect
+- Add enemy gradient and ultimate enemy
+- Add black holes?
+- Add music like jaws when something bad is getting close
+- Add herbivore/predator like small ecosystem that is self sustaining
+- Add random chance of asteroids hitting planets or stars
+- Seed/deterministic universe generator
+
+IDEA GENERATORS
+- Review coding train videos and look for ideas!
+
+ORDERS
+- Find the closest star
+- Scan a planet near that star (see if its worth the ammo)
+- Harvest the planet
+- Bring resources back
+- Choose upgrade (speed, weapons, cargo, fuel)
+- Harvest one asteroid
+- Harvest 1000 res worth of planets (some colored planets have more res)
+- Upgrade weapons to star destroyer
+- Harvest a star
+- Harvest a star in Galaxy X10Y10
+    Upon entering this Galaxy the player is contacted by planet of people saying 
+    - The mothership is trying to destroy the universe
+    - You are a clone of the previous Android 6940
+    - The last Android tried to fight the mothership and was destroyed (plant ship wreck somewhere in GX0Y0)
+    
+    The player must choose to fight the planet or the mothership
+    - If the planet is destroyed, the player can live with the mothership and continue upgrading
+    - If the mothership is destroyed, the player is left stranded with no fuel (but thanked by planet ppl)
+
+    Regardles of which scenario is picked, the game only ends when the mothership is destroyed
