@@ -4,11 +4,65 @@
         <meta charset="UTF-8">
         <title>Android #6941</title>
         <link rel="stylesheet" href="css/game.css">
+        <link rel="stylesheet" href="css/game_mobile.css">
     </head>
     <body>
         <canvas id="game"></canvas>
-        <div class="console" id="ship_console"></div>
-        <div class="console" id="mothership_console"></div>
+        <div class="console" id="central_message"></div>
+        <div id="ship_console_window">            
+        
+            <div class="console hidden" id="dev_console">
+
+                <b>DEVELOPMENT OPTIONS</b>
+
+                <div onclick="maxShipUpgrades()" class="button">Max upgrades</div>        
+                <div onclick="ship.addResources(1000)" class="button">+1000 energy</div>
+                <div onclick="ship.upgrades.menu_available = !ship.upgrades.menu_available" class="button">Toggle upgrade menu</div>    
+                <div onclick="spawnAsteroidSwarm(100, space.x/2, space.y/2);" class="button">Spawn asteroids</div>   
+            </div> 
+
+            <div class="console hidden" id="upgrade_console">
+
+                <b>UPGRADES</b>
+
+                <div class="console_row" id="ship_speed_row">
+                    <div class="button small" onclick="upgrade('ship_speed')">✚</div>
+                    <span id="ship_speed_display"></span> 
+                    <span class="note" id="ship_speed_note"></span>
+                </div>
+
+                <div class="console_row" id="ship_harvest_row">
+                    <div class="button small" onclick="upgrade('ship_harvest')">✚</div>
+                    <span id="ship_harvest_display"></span> 
+                    <span class="note" id="ship_harvest_note"></span>
+                </div> 
+
+                <div class="console_row" id="ship_weapon_row">
+                    <div class="button small" onclick="upgrade('ship_weapon')">✚</div>
+                    <span id="ship_weapon_display"></span> 
+                    <span class="note" id="ship_weapon_note"></span>
+                </div> 
+            </div>
+
+            <div class="console hidden" id="cargo_console">
+
+                <b>CARGO</b>
+
+                <span id="cargo_console_display">
+                </span>        
+            </div>
+
+            <div class="console">
+
+                <b>NAVIGATION</b>   
+
+                <span id="nav_console_display">
+                    <br/>
+                    <br/>Loading...
+                </span>
+            </div>
+        </div>
+
         <div class="console" id="scan_results"></div>
         <div>
             <img id="mothership_explosion_gif" src = "assets/mothership_explosion.gif" />
@@ -27,7 +81,7 @@
         <script src="js/ui.js"></script>
         <script src="js/presets.js"></script>
         <script src="js/ship.js"></script>
-        <script src="js/orders.js"></script>
+        <script src="js/missions.js"></script>
         <script src="js/images.js"></script>
         <script src="js/audio.js"></script>
         <script src="js/functions.js"></script>

@@ -16,7 +16,7 @@ function activateAudio(){
     setTimeout(() => {        
         welcomeMessage();
         setTimeout(() => {
-            startOrder(ship.current_order);
+            startMission(ship.current_mission);
         }, presets.welcome_message_time_ms)
     }, 500);
     
@@ -84,7 +84,7 @@ async function speak(text, force_cancel_previous=true, voice_index=0, allow_mess
     
     const characters_per_second = 10
     const ms_to_wait = text.length / characters_per_second * 1000
-    console.log("speak() ms_to_wait", ms_to_wait)
+    // console.log("speak() ms_to_wait", ms_to_wait)
     setTimeout(() => { 
         ship.console.voice_speaking = false 
     }, ms_to_wait)

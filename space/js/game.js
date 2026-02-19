@@ -3,17 +3,12 @@
 let mothership;
 startGame();
 function startGame(){
-
-
-    ship.current_order = getOrderIndexByTag(presets.first_order_tag);
-    
+    ship.current_mission = getMissionIndexByTag(presets.first_mission_tag);
     generateGalaxy();
     loop(performance.now());
     setInterval(slowLoop, 500);
 }
 function restartGame(){
-
-    if(ship.alive) return
 
     ship.alive = true;
     ship.collides = true;
@@ -31,7 +26,7 @@ function restartGame(){
     welcomeMessage();
 
     setTimeout(() => {
-        startOrder(ship.current_order);        
+        startMission(ship.current_mission);        
     }, presets.welcome_message_time_ms);
 
 }
@@ -55,7 +50,7 @@ function gameOver(){
         Three...
         Two...
         One...`)
-    ship.console.last_message = "You won!";
+    changeConsoleMessage("You won!");
 
     /// Destroy all mothership projectiles
     // space.bodies = space.bodies.filter(b => b.type !== "mothership_projectile");
@@ -64,7 +59,7 @@ function gameOver(){
     setTimeout(() => {
 
         mothership_explosion_gif.style.display = "block";
-        ship_console.style.display = "none";
+        ship_console_window.style.display = "none";
         setInterval(drawMotherShipExplosion, 50);
         setTimeout(() => {
             playAudio("audio_explosion", true, "assets/mothership_explosion.mp3");
@@ -94,7 +89,7 @@ function autoShipMovement(){
         if(getDistanceToShip(mothership) >= mothership.radius + 66){
             /// Go towards mothership before it explodes
             ship.turnToCoordinates(mothership.x, mothership.y);
-            ship.v_max = 2;
+            ship.v_max = 4;
             toggleShipEngines(true);
         }else{
             /// Stop
@@ -119,7 +114,7 @@ function drawMotherShipExplosion(){
 
 function getPlanetInScanArea(){
     let nearest_planet = findNearestBody("planet")
-    return checkIfBodyIsWithinDistanceToShip(nearest_planet, ship.console.scan_radius)
+    return checkIfBodyIsWithinDistanceToShip(nearest_planet, ship.upgrades.harvest.getScanRadius())
 }
 function checkIfBodyIsWithinDistanceToShip(body, critical_distance){
     let distance = getDistanceToShip(body);
@@ -136,11 +131,12 @@ function getDistanceToShip(body){
 
 // ---------- GAME LOOP ----------
 function slowLoop(){
-    checkOrderStatus();    
+    checkMissionStatus();    
     planetScanner();
     drawConsoles();
-    const number_of_asteroids = 3 + Math.floor(Math.random() * 2);
-    // addAsteroids(1);
+
+    space.bodies_noninteractive.sort((a, b) => b.zIndex - a.zIndex)
+    space.bodies.sort((a, b) => b.zIndex - a.zIndex)
 }
 
 function fpsFactor(){
@@ -155,8 +151,6 @@ function fpsFactor(){
 }
 function loop(now) {
 
-
-
     /// Adjust camera
     space.camera.x = ship.x - canvas.width / 2;
     space.camera.y = ship.y - canvas.height / 2;
@@ -168,12 +162,19 @@ function loop(now) {
     updatePhysics();
 
     /// Rendering
-    space.bodies.forEach(p => p.draw());
-    space.bodies_noninteractive.forEach(p => p.draw());
+    space.bodies_noninteractive.forEach(b => {
+        if(isVisibleForPlayer(b)) b.draw() 
+    });
+    space.bodies.forEach(b => {
+        if(isVisibleForPlayer(b)) b.draw() 
+    });
     ship.draw();
     if(ship.console.current_planet){
         drawPlanetScanResults()
     }
+
+    /// Mothership indicator
+    drawMothershipPointer();
 
     
     /// FPS logic
@@ -188,9 +189,11 @@ function loop(now) {
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.fillStyle = "white";
     ctx.font = "14px monospace";
-    ctx.fillText("FPS: " + space.camera.smoothedFps.toFixed(0), 10, 20);
-    ctx.fillText("iBodies: " + space.bodies.length, 10, 40);
-    ctx.fillText("nBodies: " + space.bodies_noninteractive.length, 10, 60);
+    ctx.fillText(presets.version, 10, 20);
+    ctx.fillText("FPS: " + space.camera.smoothedFps.toFixed(0), 10, 40);
+    const total_bodies = space.bodies.length + space.bodies_noninteractive.length;
+    ctx.fillText("Objects: " + total_bodies, 10, 60);
+    // ctx.fillText("nBodies: " + space.bodies_noninteractive.length, 10, 60);
 
     requestAnimationFrame(loop);
 }

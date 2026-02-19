@@ -1,35 +1,39 @@
 
 
-MUST DO FIXES
-- Figure out why some dust particles or asteroids get left behind with zero speed just sitting there (noncollidable too)
-Most likely to do with the generateGalaxy/
-- stop draw for objects outside canvas
+Favorite IDEAS
+- Nanobot NPC - flocking particles that devour planets and other objects (thus multiplying)
+- Add space stations (similar to planets) that have a force field and drop energy (mini-boss)
+- Mobile controls 
 
 JP feedback
+- Other NPC harvesters that run away
+- Give weapon later, start with passive harvesting
 - More attacks in boss fight
 - More missions
 - Flying and shooting should be easier
 - More boss fights/sequences
-- Add sounds to orbs
-- Add overheat countdown when near a sun
 - Add indication that the mothership will start shooting homing missiles
 - Add a better collection sound
 - Vary energy/health ratio of planets so scanning has a purpose
-- Add mini-boss planets
-- Add space stations (similar to planets) that have a force field and drop energy
-- Give weapon later, start with passive harvesting
 - Add stage 2 ballistics missiles
 - Mothership shield with a gap?
-- Other NPC harvesters that run away
-- Nanobot NPC /other types
+- Add many NPC types
 - Draw new ship
 - Take planets from real NASA images
 
 
 IDEAS
 Its like space is ultimate freedom, but you are a slave
+- Add star destruction/nebula mechanic
+- Find broken/hiding "last Android model" before you
+- Resource logic. Start by harvesting passive blue commets & upgrading speed, then catch green commets to upgrade harvesting, then harvest red energy to upgrade shooting
+- Add an upgrade view which shows the roadmap/paths (3 paths? Shoot, move/teleport, harvest)
+--- Cool upgrade names like 
+---- "Warp drive" for ultimate speed/wormhole movement (moves very quickly and can skip galaxies?)
+---- "Planet harvester" for ultimate harvester (harvests from the entire star system at a high speed)
+---- "Star destroyer" for ultimate shooter (destroys planets in one shot and can destroy stars/cause nebulas)
+
 - Add rogue asteroids/commets that give extra points
-- Add ability to harvest planets (not destroy)
 - Add roaming pirates/aliens/dangerous NPCs
 - Add different resource types based on body color (brown = iron, green = zync etc.)
 - Add trading hubs?
@@ -44,7 +48,7 @@ Its like space is ultimate freedom, but you are a slave
 IDEA GENERATORS
 - Review coding train videos and look for ideas!
 
-ORDERS
+MISSIONS
 - Find the closest star
 - Scan a planet near that star (see if its worth the ammo)
 - Harvest the planet

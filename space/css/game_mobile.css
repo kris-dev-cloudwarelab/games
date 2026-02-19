@@ -1,0 +1,20 @@
+
+
+
+/* MOBILE ONLY */
+/* Extra small devices (phones, 600px and down) */
+@media (max-width: 1000px) {
+
+
+
+#fireButton{
+    display: block;
+    position: fixed;
+    background-color: var(--accent-red);
+    color: white;
+    bottom: 20px;
+    left: 20px;
+    padding: 20px;
+}
+    
+}

@@ -1,11 +1,10 @@
 
 
 *{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    
-  -webkit-user-select: none; /* Safari */
-  user-select: none; /* Non-prefixed version, 
-                        currently supported by all other modern browsers */
+    font-family: Verdana, Geneva, Tahoma, sans-serif;    
+    -webkit-user-select: none;
+    user-select: none; 
+    box-sizing: border-box;
 }
 :root{
     --accent-red: #f60100;
@@ -13,7 +12,6 @@
     --accent-green: #01f700;
     --accent-green2: #00cc00;
     --accent-blue: #64e9e5;
-
     
     --main-accent: var(--accent-blue)
 }
@@ -27,17 +25,19 @@ canvas {
     display: block; 
     touch-action: none;
 }
-
 #fireButton{
+    display: none;
+}
+#ship_console_window{  
     position: fixed;
-    background-color: var(--accent-red);
-    color: white;
-    bottom: 20px;
-    left: 20px;
-    padding: 20px;
+    z-index: 3;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 .console{
-    position: fixed;
     background-color: black;
     border: 2px solid var(--main-accent);
     border-radius: 10px;
@@ -46,28 +46,42 @@ canvas {
     color: white;
     z-index: 3;
     font-size: 20px;
+
+    transition: transform 1s ease-in-out;
+    transform: translateX(0);
+}
+.console.hidden{
+    transform: translateX(110%);
+}
+.danger_message{
+    background-color: var(--accent-red);
+    color: white;
 }
 .note{
     font-size: 12px;
     color: var(--main-accent);
 }
-#mothership_console{
+#central_message{
+    position: fixed;
     pointer-events: none;
     top: 10%;
     left: 50%;
     max-width: 90vw;
     text-align: center;
     transform: translate(-50%, -50%);
-}
-#ship_console{  
-    bottom: 20px;
-    right: 20px;
+    touch-action: none;
 }
 .console_row{
     display: flex;
     justify-content: left;
     align-items: center;
     gap: 5px;
+    height: auto;
+    transition: height 1s ease-in-out;
+    overflow-y: hidden;
+}
+.console_row.hidden{
+    height: 0px;
 }
 .button{
     display: flex;
@@ -77,9 +91,12 @@ canvas {
     font-size: 12px;
     color: black;
     background-color: var(--main-accent);
+    padding: 10px 20px;
+    margin: 5px;
 }
 .button.small{
     border-radius: 50%;
+    padding: 0px;
     width: 20px;
     height: 20px;
 }
@@ -91,6 +108,7 @@ canvas {
     width: 100px;
 }
 #scan_results{
+    position: fixed;
     /* Dont interact with mouse */
     pointer-events: none;
 }

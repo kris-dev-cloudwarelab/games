@@ -1,14 +1,19 @@
 
 
 const presets = {
-    first_order_tag: "welcome",
-    // first_order_tag: "asteroid_swarm", 
-    // first_order_tag: "destroy_earth", 
+    version: "v0.1.0",
+    dev: false,
+    first_mission_tag: "welcome",
+    
+    // first_mission_tag: "asteroid_swarm", 
+    // first_mission_tag: "start_weapon",
+    // first_mission_tag: "start_harvest",
+    // first_mission_tag: "kill_npc",
+    // first_mission_tag: "destroy_earth", 
     
     welcome_message_time_ms: 3500,
     energy_per_orb: 10,    
     starting_resources: 0*1000,
-    upgrade_menu_available: false,
     mothership_health: 500,
     final_galaxy: {
         x: 2,
@@ -18,6 +23,7 @@ const presets = {
         x: 10*1000,
         y: 10*1000,
         G: 0.01,
+        max_npc_count: 10,
         gravity_cutoff_distances: {
             min: 10, /// Closer than that and weird results will happen
             max: 1000
@@ -60,6 +66,8 @@ const presets = {
     },
     planet: {
         rotation_speed: 0.005,
+        mass_per_health_unit: 10, /// 50 units => 1000 mass / 50 = 20 health
+        resources_per_health_unit: 5, /// 100 health = 20 resources
         size: {
             min: 10, /// Depends on the star
             deviation: 20 /// Depends on the star

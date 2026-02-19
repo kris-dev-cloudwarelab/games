@@ -1,9 +1,13 @@
 
+const npcIdleImage = new Image();
+npcIdleImage.src = "assets/ship_idle.png"; 
+const npcImageEngineOn = new Image();
+npcImageEngineOn.src = "assets/ship3_engine_on.png"; 
 
 const shipIdleImage = new Image();
-shipIdleImage.src = "assets/ship_idle.png"; 
+shipIdleImage.src = "assets/ship2_idle.png"; 
 const shipImageEngineOn = new Image();
-shipImageEngineOn.src = "assets/ship_engine_on.png"; 
+shipImageEngineOn.src = "assets/ship2_engine_on.png"; 
 const shipExplodeImage = new Image();
 shipExplodeImage.src = "assets/ship_destroyed.png"; 
 

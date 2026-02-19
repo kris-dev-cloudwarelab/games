@@ -1,5 +1,8 @@
 
 // ---------- STARS ----------
+function getRandom(min, max) {
+  return min + Math.random() * (max - min + 1);
+}
 function randomColor(body_type) {
     if (body_type == "star") {
         return presets.star.colors[Math.floor(Math.random() * presets.star.colors.length)];
@@ -9,6 +12,20 @@ function randomColor(body_type) {
 }
 
 
+function hexToRgbA(color, opacity) {
+    // Let browser normalize any CSS color (hex, rgb, named, etc.)
+    const temp = document.createElement("div");
+    temp.style.color = color;
+    document.body.appendChild(temp);
+
+    const computed = getComputedStyle(temp).color;
+    document.body.removeChild(temp);
+
+    const match = computed.match(/\d+/g);
+    if (!match) throw new Error("Invalid color");
+
+    return `rgba(${match[0]}, ${match[1]}, ${match[2]}, ${opacity})`;
+}
 
 function spawnDust(body, fps_check=true){
     
@@ -86,5 +103,5 @@ function wrapBody(body) {
 function generatePlanetName(){
   let name = presets.planet.names[Math.floor(Math.random() * presets.planet.names.length)];
   let number = Math.floor(Math.random() * 1000);
-  return name + " #" + number
+  return name;
 }

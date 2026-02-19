@@ -9,7 +9,7 @@ function sayGoodThingsToUser(){
         "Keep it up!"
     ];
     let message = good_messages[Math.floor(Math.random() * good_messages.length)];
-    mothershipSpeak(message)
+    mothershipSpeak(message, false)
     return message;
 }
 function sayOops(){
@@ -27,7 +27,7 @@ function sayOops(){
         "Don't shoot at me!"
     ];
     let message = bad_messages[Math.floor(Math.random() * bad_messages.length)];
-    mothershipSpeak(message)
+    mothershipSpeak(message, false)
     return message;
 }
 function sayBadThings(){
@@ -73,20 +73,17 @@ function resourcesCollected(critical_value){
     }
 }
 
-function starVisible(){
+function checkIfStarRadiusIsVisible(){
     
-    for (let i = 0; i < space.bodies.length; i++) {
-        if(space.bodies[i].type == "star"){
-            let star_x = space.bodies[i].x;
-            let star_y = space.bodies[i].y;
-            let vision = canvas.height;
-            let distance = Math.sqrt(Math.pow(star_x - ship.x, 2) + Math.pow(star_y - ship.y, 2));
-            if(distance < vision){
-                return true
-            }
-        }
-    }
-    return false
+    const nearest_star = findNearestBody("star");    
+    const distance = getDistanceToShip(nearest_star);
+    return distance < canvas.width*0.4;
+
+}
+function checkIfAtLeastOneBodyVisible(body_type){
+    
+    const nearest_star = findNearestBody(body_type);    
+    return isVisibleForPlayer(nearest_star);
 }
 function findNearestBody(type){
     
@@ -119,7 +116,7 @@ function motherShipNear(){
 
 function welcomeMessage(){
     let message = `Welcome ${ship.name} #${ship.name_number}!`
-    ship.console.last_message = message       
+    changeConsoleMessage(message);
     mothershipSpeak(message) 
 }
 
