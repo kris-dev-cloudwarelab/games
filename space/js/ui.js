@@ -35,6 +35,9 @@ function drawConsoles(){
     ship_weapon_display.innerHTML = `Weapon: ${getUpgradeLevel("ship_weapon")}`
     ship_weapon_note.innerHTML = getUpgradeNote("ship_weapon")
 
+    /// Fire button
+    fireButton.classList = ship.upgrades.weapon.level ? "" : "hidden"
+
     /// CARGO console
     const cargo_console_class = ship.cargo.resources ? "" : "hidden"
     cargo_console.classList = `console ${cargo_console_class}`
@@ -53,9 +56,9 @@ function drawConsoles(){
 
 function canAffordAnyUpgrades(){
 
-    if(ship.upgrades.speed.level > 0 && getUpgradeLevel("ship_speed") < ship.upgrades.max_level && ship.cargo.resources > resToUpgrade("ship_speed")) return true
-    if(ship.upgrades.harvest.level > 0 && getUpgradeLevel("ship_harvest") < ship.upgrades.max_level && ship.cargo.resources > resToUpgrade("ship_harvest")) return true
-    if(ship.upgrades.weapon.level > 0 && getUpgradeLevel("ship_weapon") < ship.upgrades.max_level && ship.cargo.resources > resToUpgrade("ship_weapon")) return true
+    if(ship.upgrades.speed.level > 0 && getUpgradeLevel("ship_speed") < ship.upgrades.max_level && ship.cargo.resources >= resToUpgrade("ship_speed")) return true
+    if(ship.upgrades.harvest.level > 0 && getUpgradeLevel("ship_harvest") < ship.upgrades.max_level && ship.cargo.resources >= resToUpgrade("ship_harvest")) return true
+    if(ship.upgrades.weapon.level > 0 && getUpgradeLevel("ship_weapon") < ship.upgrades.max_level && ship.cargo.resources >= resToUpgrade("ship_weapon")) return true
 }
 
 function getUpgradeNote(upgrade_type){

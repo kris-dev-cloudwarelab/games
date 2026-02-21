@@ -1,49 +1,49 @@
 
 
-canvas.addEventListener("pointerdown", (event) => {
-    event.preventDefault();
+// canvas.addEventListener("pointerdown", (event) => {
+//     event.preventDefault();
 
-    if (!ship.alive || ship.inputs_disabled) return;
+//     if (!ship.alive || ship.inputs_disabled) return;
 
-    // Left click OR touch
-    if (event.button === 0 || event.pointerType === "touch") {
-        toggleShipEngines(true);
-    }
+//     // Left click OR touch
+//     if (event.button === 0 || event.pointerType === "touch") {
+//         toggleShipEngines(true);
+//     }
 
-    // Capture pointer so we still receive events if finger moves off canvas
-    canvas.setPointerCapture(event.pointerId);
-});
+//     // Capture pointer so we still receive events if finger moves off canvas
+//     canvas.setPointerCapture(event.pointerId);
+// });
 
-canvas.addEventListener("pointerup", (event) => {
-    if (!ship.alive || ship.inputs_disabled) return;
-    toggleShipEngines(false);
-});
+// canvas.addEventListener("pointerup", (event) => {
+//     if (!ship.alive || ship.inputs_disabled) return;
+//     toggleShipEngines(false);
+// });
 
-canvas.addEventListener("pointercancel", () => {
-    if (!ship.alive || ship.inputs_disabled) return;
-    toggleShipEngines(false);
-});
+// canvas.addEventListener("pointercancel", () => {
+//     if (!ship.alive || ship.inputs_disabled) return;
+//     toggleShipEngines(false);
+// });
 
-canvas.addEventListener("pointermove", (e) => {
-    if (!ship.alive || ship.inputs_disabled) return;
+// canvas.addEventListener("pointermove", (e) => {
+//     if (!ship.alive || ship.inputs_disabled) return;
 
-    const rect = canvas.getBoundingClientRect();
-    const screenX = e.clientX - rect.left;
-    const screenY = e.clientY - rect.top;
+//     const rect = canvas.getBoundingClientRect();
+//     const screenX = e.clientX - rect.left;
+//     const screenY = e.clientY - rect.top;
 
-    const { x, y } = screenToWorld(screenX, screenY);
-    ship.turnToCoordinates(x, y);
-});
+//     const { x, y } = screenToWorld(screenX, screenY);
+//     ship.turnToCoordinates(x, y);
+// });
 
-// SHOOTING
-const fireBtn = document.getElementById("fireButton");
-addEventListener("wheel", (event) => { 
-    fireBtn.dispatchEvent(new PointerEvent("pointerdown"));
-})
-fireBtn.addEventListener("pointerdown", () => {
-    if (!ship.alive || ship.inputs_disabled) return;
-    shootProjectile();
-});
+// // SHOOTING
+// const fireBtn = document.getElementById("fireButton");
+// addEventListener("wheel", (event) => { 
+//     fireBtn.dispatchEvent(new PointerEvent("pointerdown"));
+// })
+// fireBtn.addEventListener("pointerdown", () => {
+//     if (!ship.alive || ship.inputs_disabled) return;
+//     shootProjectile();
+// });
 
 
 // ---------- RESET ----------
@@ -55,6 +55,7 @@ window.addEventListener("keydown", e => {
     presets.dev = !presets.dev
   }
 });
+
 
 function toggleShipEngines(active){
     if(active && !ship.engine_on){

@@ -4,17 +4,40 @@
 /* MOBILE ONLY */
 /* Extra small devices (phones, 600px and down) */
 @media (max-width: 1000px) {
+    
+*{
+    font-size: 12px;
+    touch-action: manipulation;
+}
 
-
+.console{
+    font-size: 12px;
+}
 
 #fireButton{
-    display: block;
-    position: fixed;
-    background-color: var(--accent-red);
+    display: flex;
+    position: fixed;    
     color: white;
     bottom: 20px;
     left: 20px;
-    padding: 20px;
+    width: 100px;
+    height: 100px;
+    /* border: 2px solid var(--accent-red); */
+    background-color: var(--accent-red);
+    border-radius: 50%;
+    opacity: 0.5;
+    align-items: center;
+    justify-content: center;
 }
+
+#fireButton.hidden{
+    display: none;
+}
+
+.mobile_only{
+    display: flex;
+}
+
+
     
 }

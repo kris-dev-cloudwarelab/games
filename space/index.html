@@ -4,22 +4,43 @@
         <meta charset="UTF-8">
         <title>Android #6941</title>
         <link rel="stylesheet" href="css/game.css">
+        <link rel="stylesheet" href="css/joystick.css">
         <link rel="stylesheet" href="css/game_mobile.css">
     </head>
     <body>
         <canvas id="game"></canvas>
         <div class="console" id="central_message"></div>
+
+        <!-- MOBILE CONTROLS -->
+        <div id="fireButton" class="mobile_only">Fire!</div>        
+
+        <div class="joystick-container">
+            <div class="joystick-base"></div>
+            <div class="joystick-thumb"></div>
+        </div>
+        <div class="debug">X: 0 | Y: 0</div>
+
+        <!-- SHIP CONSOLE -->
         <div id="ship_console_window">            
         
-            <div class="console hidden" id="dev_console">
 
-                <b>DEVELOPMENT OPTIONS</b>
+            <div class="console">
 
-                <div onclick="maxShipUpgrades()" class="button">Max upgrades</div>        
-                <div onclick="ship.addResources(1000)" class="button">+1000 energy</div>
-                <div onclick="ship.upgrades.menu_available = !ship.upgrades.menu_available" class="button">Toggle upgrade menu</div>    
-                <div onclick="spawnAsteroidSwarm(100, space.x/2, space.y/2);" class="button">Spawn asteroids</div>   
-            </div> 
+                <b>NAVIGATION</b>   
+
+                <span id="nav_console_display">
+                    <br/>
+                    <br/>Loading...
+                </span>
+            </div>
+
+            <div class="console hidden" id="cargo_console">
+
+                <b>CARGO</b>
+
+                <span id="cargo_console_display">
+                </span>        
+            </div>            
 
             <div class="console hidden" id="upgrade_console">
 
@@ -44,23 +65,15 @@
                 </div> 
             </div>
 
-            <div class="console hidden" id="cargo_console">
+            <div class="console hidden" id="dev_console">
 
-                <b>CARGO</b>
+                <b>DEVELOPMENT OPTIONS</b>
 
-                <span id="cargo_console_display">
-                </span>        
-            </div>
-
-            <div class="console">
-
-                <b>NAVIGATION</b>   
-
-                <span id="nav_console_display">
-                    <br/>
-                    <br/>Loading...
-                </span>
-            </div>
+                <div onclick="maxShipUpgrades()" class="button">Max upgrades</div>        
+                <div onclick="ship.addResources(1000)" class="button">+1000 energy</div>
+                <div onclick="ship.upgrades.menu_available = !ship.upgrades.menu_available" class="button">Toggle upgrade menu</div>    
+                <div onclick="spawnAsteroidSwarm(100, space.x/2, space.y/2);" class="button">Spawn asteroids</div>   
+            </div> 
         </div>
 
         <div class="console" id="scan_results"></div>
@@ -68,7 +81,6 @@
             <img id="mothership_explosion_gif" src = "assets/mothership_explosion.gif" />
         </div>
 
-        <div id="fireButton">Fire Laser!</div>
         <audio id="audio_ambience" loop></audio>
         <audio id="audio_ship" loop></audio>
         <audio id="audio_ship_collect"></audio>
@@ -89,5 +101,6 @@
         
         <script src="js/game.js"></script>
         <script src="js/inputs.js"></script>
+        <script src="js/joystick.js"></script>
     </body>
 </html>

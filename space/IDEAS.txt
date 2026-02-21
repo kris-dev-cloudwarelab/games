@@ -3,7 +3,8 @@
 Favorite IDEAS
 - Nanobot NPC - flocking particles that devour planets and other objects (thus multiplying)
 - Add space stations (similar to planets) that have a force field and drop energy (mini-boss)
-- Mobile controls 
+- Mobile controls
+- More weapon types, higher tiers consume energy
 
 JP feedback
 - Other NPC harvesters that run away
@@ -20,6 +21,18 @@ JP feedback
 - Add many NPC types
 - Draw new ship
 - Take planets from real NASA images
+
+Ludwig feedback
+- Gigantic laser for the final battle (cuts of a whole part of space)
+- Likes the speed effect on background stars
+- 10 energy does not enable the energy console (limit AND INCLUDED should brijng it up)
+- Some missions can downgrade weapons for no reason (it should set level 1 only if its zero now)
+- Agressive NPCs
+- Shoot by holding a button instead of wheel (space on PC, onscreen on mobile)
+- Dangerous asteroids
+- Slight "blowback" when shooting, so you slow downgrade
+- Dying should cost something res or upgrades
+- 
 
 
 IDEAS
